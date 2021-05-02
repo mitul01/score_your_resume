@@ -32,8 +32,9 @@ def index():
 @resume.route('/upload',methods=['GET','POST'])
 def upload():
     if request.method == 'POST':
-        if request.files['inputFile']:
-            file = request.files['inputFile']
+        if request.files['file-5[]']:
+            print("found")
+            file = request.files['file-5[]']
             if file.filename == '':
                 flash('No selected file')
                 return render_template('index.html') #return redirect(request.url)
@@ -42,6 +43,7 @@ def upload():
                 file_path=save_file(file)
                 sr=ScoreResume(file_path,request.form['careers'])
                 score=sum(sr.points())
+                print(score)
                 return str(score)
         else:
             return ("No file found")
