@@ -33,17 +33,18 @@ def index():
 def upload():
     if request.method == 'POST':
         if request.files['file-5[]']:
-            print("found")
             file = request.files['file-5[]']
             if file.filename == '':
-                flash('No selected file')
+                print('No selected file')
                 return render_template('index.html') #return redirect(request.url)
             if file and allowed_file(file.filename):
-                flash('File Found')
+                print('File Found')
                 file_path=save_file(file)
-                sr=ScoreResume(file_path,request.form['careers'])
+                sr=ScoreResume(file_path,"Data Science")
                 score=sum(sr.points())
-                print(score)
+                #verbs=sr.get_verbs()
+                passive=sr.voice()
+                print(score,passive)
                 return str(score)
         else:
             return ("No file found")
