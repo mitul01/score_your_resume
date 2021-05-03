@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Blog Post - Start Bootstrap Template</title>
+        <title>Resume Checker</title>
         <!-- Favicon-->
         <script src="https://kit.fontawesome.com/888620bd16.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{ url_for('static',filename='css/styles.css')}}" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
         <!-- <link rel="stylesheet" href="css/style1.css"> -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     </head>
@@ -55,22 +55,29 @@
                     <!-- <img class="img-fluid rounded" src="https://via.placeholder.com/900x300" alt="..." /> -->
                     <div class="col-lg-9 one">
                     <!-- Search widget-->
-                    <div class="card my-3 ">
+                    <div class="card my-3 no-bor">
                         <!-- <h5 class="card-header">Search</h5>  Input field below is where the file upload comes -->
-                        <div class="card-body size-up upload rounded">
-
-        <input type="file" name="file-5[]" id="file-5" class="inputfile inputfile-4 change" data-multiple-caption="{count} files selected" accept=".docx, application/pdf,application/msword" />
-                    <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>Choose a file&hellip;</span></label>
+                    <form>
+                    <div class="card-body size-up upload rounded">
+                    
+                    <input type="file" name="file-5[]" id="file-5" class="inputfile inputfile-4 change" data-multiple-caption="{count} files selected" accept=".docx, application/pdf,application/msword" />
+                    <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span class="filename">Choose a file&hellip;</span></label>
                     <br>
+                    <input type="submit" name="Submit" id="submit-btn" class=" valo submit-changes">
+                    <!--                   
                     <div class="valo">
-                    </a><a class="white" href="#">
+                    <a class="white" href="#">
                     <p><span class="bg"></span><span class="base"></span><span class="text">Submit</span></p>
                   </a>
-                </a></div>
+                </div> -->
+
+           </div> 
+        </form>
                         </div>
-                    </div></div>
+                    </div>
                     <hr />
                     <!-- Post content-->
+
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
@@ -167,7 +174,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{ url_for('static',filename='js/scripts.js')}}"></script>
-        <script src="{{ url_for('static',filename='js/upload.js')}}"></script>
+        <script src="js/upload.js"></script>
 
     </body>
 
@@ -175,7 +182,6 @@
 <div class="col-lg-9 one">
                     <div class="card my-3">
                         <div class="card-body">
-
                             <h4>Ad goes here</h4>
                         </div>
                     </div></div> -->
