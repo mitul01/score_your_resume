@@ -48,6 +48,9 @@
                     <!-- <p>Posted on January 1, 2021 at 12:00 PM</p> -->
                     <br>
                     <h3 class="tool__header__title">To get started, upload your resume below <i class="fas fa-arrow-alt-circle-down"></i></h3>
+                    {% for mesg in get_flashed_messages() %}
+                      <h5 align=center>{{ mesg }}</h5>
+                        {% endfor %}
                     <!-- Preview image-->
                     <!-- <img class="img-fluid rounded" src="https://via.placeholder.com/900x300" alt="..." /> -->
                     <div class="col-lg-9 one">

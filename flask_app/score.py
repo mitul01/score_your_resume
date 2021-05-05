@@ -10,20 +10,21 @@ import spacy
 from spacy.matcher import Matcher
 import math
 from collections import Counter
-# from flask_app.utils.grammar import extract_grammar_words
-# from flask_app.utils.active_voice import ActiveVoice
-from utils.grammar import extract_grammar_words
-from utils.active_voice import ActiveVoice
+from flask_app.utils.grammar import extract_grammar_words
+from flask_app.utils.active_voice import ActiveVoice
+# from utils.grammar import extract_grammar_words
+# from utils.active_voice import ActiveVoice
 
-# PATH="F:/Study/Resume/"
+# PATH="F:/Study/Resume/101803084_MitulTandon.pdf"
 
 class ScoreResume:
-    def __init__(self,file_path,career):
-        self.file_path=file_path
+    def __init__(self,file,file_ext,career):
+        self.file_ext=file_ext
+        self.file=file
         self.career=career
 
     def __repr__(self):
-        return repr("Path:"+ str(self.file_path))
+        return repr("FileObj:"+ str(self.file))
 
     def range_score(self,input,output_start,output_end,input_start,input_end):
         output = output_start + ((output_end - output_start) / (input_end - input_start)) * (input - input_start)
@@ -34,12 +35,10 @@ class ScoreResume:
         return scaled_input
 
     def get_file_text(self):
-        file_extension = pathlib.Path(self.file_path).suffix
-        FileObj = open(self.file_path, 'rb')
-        doc_text=[]
         # Read PDF file
-        if file_extension==".pdf":
-            pdfReader = PyPDF2.PdfFileReader(FileObj)
+        if self.file_ext==".pdf":
+            doc_text=[]
+            pdfReader = PyPDF2.PdfFileReader(self.file)
             pages=pdfReader.numPages
             for p in range(0,pages):
                 pageObj=pdfReader.getPage(p)
@@ -50,8 +49,8 @@ class ScoreResume:
             doc_text=",".join(doc_text)
             return doc_text
         # Read docx file
-        elif file_extension==".docx":
-            text = docx2txt.process(self.file_path)
+        elif self.file_ext==".docx":
+            text = docx2txt.process(self.file)
             return text
 
     def clean_text(self,text):
@@ -96,6 +95,16 @@ class ScoreResume:
                                 input_start=0,input_end=1,input=subjectivity)
 
         return (scaled_polarity,scaled_subjectivity)
+
+    def quantifier_score(self):
+        text=self.get_file_text()
+        text=self.clean_text(text)
+        numbers = re.findall('[0-9]+', text)
+        signs = re.findall(r'%', text)
+        scaled_quant_score=self.range_score(output_start=0,output_end=100,
+                                input_start=0,input_end=len(text.split(' '))/6,input=len(numbers)+len(signs))
+        return scaled_quant_score
+
 
     def points(self):
         text=self.get_file_text()
@@ -162,14 +171,36 @@ class ScoreResume:
 
         return round(scaled_special_points),round(scaled_gen_points),len_score
 
-sr=ScoreResume(PATH,"Data Science")
-print(sr.points())
-print(sr.sentiment())
-print(sr.voice())
+# sr=ScoreResume(PATH,"Data Science")
+# print(sr.points())
+# print(sr.sentiment())
+# print(sr.voice())
+# print(sr.quantifier_score())
 
-# words count 0.1
-# keywords 0.3
-# subjectivity 0.1
-# polarity 0.2
-# active/passive 0.1
-# quantify 0.2
+def weighted_score(keywords_score,
+        word_count_score,subjectivity_score,
+        polarity_score,passive_score,quantify_score):
+            """
+            Defualt weights
+            # words count 0.1
+            # keywords 0.3
+            # subjectivity 0.1
+            # polarity 0.2
+            # active/passive 0.1
+            # quantify 0.2
+            """
+
+            weights={'word_count_score':0.1,'keywords_score':0.3,'subjectivity_score':0.1,
+                    'polarity_score':0.2,'passive_score':0.1,'quantify_score':0.2}
+
+            scores={'word_count_score':word_count_score,'keywords_score':keywords_score,'subjectivity_score':subjectivity_score,
+                    'polarity_score':polarity_score,'passive_score':passive_score,'quantify_score':quantify_score}
+
+            total_score=0
+            for k in weights.keys():
+                if k in scores.keys():
+                    total_score=total_score+(weights[k]*scores[k])
+
+            print(total_score)
+
+# weighted_score(40,50,51,33,0,31)

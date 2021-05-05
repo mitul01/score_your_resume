@@ -1,10 +1,13 @@
-from flask import render_template,request,Blueprint,flash
+from flask import render_template,request,Blueprint,flash,redirect
+from flask_app import db
 from flask_app.model import Resume
 from flask_app.forms import ResumeForm
-from flask_app.score import ScoreResume
+from flask_app.model import Resume
+from flask_app.score import ScoreResume,weighted_score
 from werkzeug.utils import secure_filename
 import secrets
 import os
+import PyPDF2
 
 resume=Blueprint('resume',__name__)
 UPLOAD_FOLDER = os.path.join(resume.root_path,'resume_files')
@@ -19,6 +22,11 @@ def save_file(file):
     file_path= os.path.join(UPLOAD_FOLDER,filename)
     file.save(file_path)
     return file_path
+
+def get_file_extension(file):
+    ext=file.filename.rsplit('.', 1)[1].lower()
+    ext= str('.'+ ext)
+    return str(ext)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -35,16 +43,14 @@ def upload():
         if request.files['file-5[]']:
             file = request.files['file-5[]']
             if file.filename == '':
-                print('No selected file')
-                return render_template('index.html') #return redirect(request.url)
+                return redirect('index.html') #return redirect(request.url)
             if file and allowed_file(file.filename):
-                print('File Found')
-                file_path=save_file(file)
-                sr=ScoreResume(file_path,"Data Science")
-                score=sum(sr.points())
-                #verbs=sr.get_verbs()
-                passive=sr.voice()
-                print(score,passive)
-                return str(score)
+                resume=Resume(file_name=file.filename,resume_file=file.read(),career="Data Science")
+                db.session.add(resume)
+                db.session.commit()
+                print(get_file_extension(file))
+                sr=ScoreResume(file,get_file_extension(file),"Data Science")
+                print(sr.points())
+                return render_template('score.html',keyword_points=sr.points())
         else:
-            return ("No file found")
+            return render_template('index.html')
