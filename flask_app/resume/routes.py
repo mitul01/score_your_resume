@@ -35,7 +35,7 @@ def allowed_file(filename):
 ## Routes
 @resume.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html',error="")
 
 @resume.route('/upload',methods=['GET','POST'])
 def upload():
@@ -43,14 +43,19 @@ def upload():
         if request.files['file-5[]']:
             file = request.files['file-5[]']
             if file.filename == '':
-                return redirect('index.html') #return redirect(request.url)
+                return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
-                resume=Resume(file_name=file.filename,resume_file=file.read(),career="Data Science")
+                sr=ScoreResume(file,get_file_extension(file),"Data Science")
+                final_score=weighted_score(keywords_score=sr.points()[0],word_count_score=sr.points()[1],
+                                        subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
+                                        passive_score=sr.voice(),quantify_score=sr.quantifier_score())
+                resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career="Data Science",weighted_score=final_score)
                 db.session.add(resume)
                 db.session.commit()
-                print(get_file_extension(file))
-                sr=ScoreResume(file,get_file_extension(file),"Data Science")
-                print(sr.points())
-                return render_template('score.html',keyword_points=sr.points())
-        else:
-            return render_template('index.html')
+                return render_template('score.html',keyword_score=sr.points()[0],word_count_score=sr.points()[1],
+                                                polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
+                                                quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score)
+            else:
+                return render_template('index.html',error="No file uploaded")
+
+    return render_template('index.html',error="")

@@ -1,0 +1,34 @@
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.isa_info, .isa_success, .isa_warning, .isa_error {
+margin: 5px 0px;
+padding:2px;
+box-shadow:1px 1px 3px #888;
+border-radius:.5em;
+}
+.isa_info {
+    border-radius:.5em;
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.isa_success {
+    border-radius:.5em;
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.isa_warning {
+    border-radius:.5em;
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.isa_error {
+    border-radius:.5em;
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
+.isa_info i, .isa_success i, .isa_warning i, .isa_error i {
+    margin:5px 5px;
+    font-size:2em;
+    vertical-align:middle;
+    border-radius:.5em;
+}

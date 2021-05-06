@@ -169,14 +169,12 @@ class ScoreResume:
         scaled_special_points=self.range_score(output_start=0,output_end=100,
                                 input_start=0,input_end=sum(points_dict.values()),input=special_points)
 
-        return round(scaled_special_points),round(scaled_gen_points),len_score
+        final_keyword_points=(scaled_gen_points+scaled_special_points)/2
 
-# sr=ScoreResume(PATH,"Data Science")
-# print(sr.points())
-# print(sr.sentiment())
-# print(sr.voice())
-# print(sr.quantifier_score())
+        return round(final_keyword_points),round(len_score)
 
+
+# weighted score generator
 def weighted_score(keywords_score,
         word_count_score,subjectivity_score,
         polarity_score,passive_score,quantify_score):
@@ -201,6 +199,4 @@ def weighted_score(keywords_score,
                 if k in scores.keys():
                     total_score=total_score+(weights[k]*scores[k])
 
-            print(total_score)
-
-# weighted_score(40,50,51,33,0,31)
+            return round(total_score)
