@@ -12,10 +12,6 @@ import math
 from collections import Counter
 from flask_app.utils.grammar import extract_grammar_words
 from flask_app.utils.active_voice import ActiveVoice
-# from utils.grammar import extract_grammar_words
-# from utils.active_voice import ActiveVoice
-
-# PATH="F:/Study/Resume/101803084_MitulTandon.pdf"
 
 class ScoreResume:
     def __init__(self,file,file_ext,career):
