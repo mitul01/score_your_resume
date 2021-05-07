@@ -3,10 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>Resume Checker</title>
         <!-- Favicon-->
+<<<<<<< HEAD
         <script src="https://kit.fontawesome.com/888620bd16.js" crossorigin="anonymous"></script>
         <script type="text/javascript">// <![CDATA[
         function preloader(){
@@ -15,12 +14,17 @@
         }//preloader
         window.onload = preloader;
 // ]]></script>
+=======
+        <link rel="icon" type="image/png" href="assets/—Pngtree—colorful letters r_3362386.png"/>
+>>>>>>> 637c0c0bb07c41beda8f8d8241234b2ada71a154
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{url_for('static',filename='css/styles.css') }}" rel="stylesheet" />
-        <link href="{{url_for('static',filename='css/error.css') }}" rel="stylesheet" />
-        <!-- <link rel="stylesheet" href="css/style1.css"> -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Fas icons -->
+        <script src="https://kit.fontawesome.com/888620bd16.js" crossorigin="anonymous"></script>
     </head>
+
+
+
 <header>
 
     <h1>Resume Checker</h1>
@@ -31,56 +35,31 @@
     <path fill="url(#a)" d="M2662.6 1S2532 41.2 2435 40.2c-19.6-.2-37.3-1.3-53.5-2.8 0 0-421.3-59.4-541-28.6-119.8 30.6-206.2 75.7-391 73.3-198.8-2-225.3-15-370.2-50-145-35-218 37-373.3 36-19.6 0-37.5-1-53.7-3 0 0-282.7-36-373.4-38C139 26 75 46-1 46v106c17-1.4 20-2.3 37.6-1.2 130.6 8.4 210 56.3 287 62.4 77 6 262-25 329.3-23.6 67 1.4 107 22.6 193 23.4 155 1.5 249-71 380-62.5 130 8.5 209 56.3 287 62.5 77 6 126-18 188-18 61.4 0 247-38 307.4-46 159.3-20 281.2 29 348.4 30 67 2 132.2 6 217.4 7 39.3 0 87-11 87-11V1z"/><path fill="#dae0e0" d="M2663.6 73.2S2577 92 2529 89c-130.7-8.5-209.5-56.3-286.7-62.4s-125.7 18-188.3 18c-5 0-10-.4-14.5-.7-52-5-149.2-43-220.7-39-31.7 2-64 14-96.4 30-160.4 80-230.2-5.6-340.4-18-110-12-146.6 20-274 36S820.4 0 605.8 0C450.8 0 356 71 225.2 62.2 128 56 60.7 28-.3 11.2V104c22 7.3 46 14.2 70.4 16.7 110 12.3 147-19.3 275-35.5s350 39.8 369 43c27 4.3 59 8 94 10 13 .5 26 1 39 1 156 2 250-70.3 381-62 130.5 8.2 209.5 56.3 286.7 62 77 6.4 125.8-18 188.3-17.5 5 0 10 .2 14.3.6 52 5 145 49.5 220.7 38.2 32-5 64-15 96.6-31 160.5-79.4 230.3 6 340 18.4 110 12 146.3-20 273.7-36l15.5-2V73l1-.5z"/><g fill="none" stroke="#E2E9E9" stroke-width="1"><path d="M0 51.4c3.4.6 7.7 1.4 11 2.3 133.2 34 224.3 34 308.6 34 110.2 0 116.7 36.6 229.8 26 113-11 128.7-44 222-42.6C865 73 889 38 1002 27c113-10.8 119.6 25.6 229.8 25.6 84.4 0 175.4 0 308.6 34 133 34.2 277-73 379.4-84.3 204-22.5 283.6 128.7 283.6 128.7"/><path d="M0 6C115.7-6 198.3 76.6 308 76.6c109.6 0 131.8-20 223-28.3 114.3-10.2 238.2 0 238.2 0s124 10.2 238.3 0c91-8.2 113.2-28 223-28S1425 103 1541 91c115.8-11.8 153.3-69 269.3-84.6 116-15.5 198.4 71 308 71 109.8 0 131.8-20 223-28 114-10.2 237.7 0 237.7 0s37.4 2.4 82.8 3.7"/></g></svg>
     </svg></div>
 
-
-
-<!-- Code added to every pen -->
 </header>
         <!-- <body> -->
-        <!-- Page content-->
         <br>
         <br>
         <div class="container">
             <div class="row">
-                <!-- Post content-->
-
-                <div class="col-lg-9">
-                    <!-- Title-->
-                    <!-- <h1 class="mt-4">Post Title</h1> -->
-                    <!-- Author-->
-                    <!-- <p class="lead"> -->
-
-                    <!--     <a href="#!">Start Bootstrap</a>
-                    </p> -->
-                    <!-- <hr /> -->
-                    <!-- Date and time-->
-                    <!-- <p>Posted on January 1, 2021 at 12:00 PM</p> -->
+                <div class="col-lg-9 full">
                     <br>
                     <h3 class="tool__header__title">To get started, upload your resume below <i class="fas fa-arrow-alt-circle-down"></i></h3>
-          {% if error == "Error Try again" %}
-          <div class="isa_error">
-            <i class="fa fa-times-circle"></i>
-            {{error}}
-            </div>
-        {% endif %}
-        {% if error == "No file uploaded" %}
-        <div class="isa_info">
-          <i class="fa fa-info-circle"></i>
-          {{error}}
-          </div>
-      {% endif %}
-                    <!-- Preview image-->
-                    <!-- <img class="img-fluid rounded" src="https://via.placeholder.com/900x300" alt="..." /> -->
                     <div class="col-lg-9 one">
-                    <!-- Search widget-->
                     <div class="card my-3 no-bor">
+<<<<<<< HEAD
                       <div id="loading"></div>
                       <div id="content">
                         <!-- <h5 class="card-header">Search</h5>  Input field below is where the file upload comes -->
                     <form method="POST" action="/upload" enctype="multipart/form-data">
+=======
+                    <form>
+>>>>>>> 637c0c0bb07c41beda8f8d8241234b2ada71a154
                     <div class="card-body size-up upload rounded">
+                    
                     <input type="file" name="file-5[]" id="file-5" class="inputfile inputfile-4 change" data-multiple-caption="{count} files selected" accept=".docx, application/pdf,application/msword" />
                     <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span class="filename">Choose a file&hellip;</span></label>
                     <br>
+<<<<<<< HEAD
                     <input type="submit" name="Submit" id="submit-btn" class=" valo submit-changes" onclick="preloader();">
               </div>
         </form>
@@ -103,114 +82,113 @@
   Is it accomplishment focused, keyword-driven, content-rich, and ready to take on any ATS out there?
   Are there any red flags (such as age discrimination, gaps, too many transitions) in your resume that would make an employer think twice about inviting you to an interview?
   If you are scratching your head at these questions, your resume could be your problem.
-
-  A bad resume can negatively impact your job search, sometimes eliminating you from consideration for your perfect job. It may be hindering you more than helping you.
-
-  Resumes are viewed by many, on both sides of the hiring process, as a necessary evil.
-                    </p>
-                    <blockquote class="blockquote">
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <img class="img-fluid rounded" src="{{url_for('static',filename='css/resume.png') }}" alt="..." />
-                        <!-- <img class="img-fluid rounded" src="https://via.placeholder.com/900x300" alt="..." /> -->
-                    </blockquote>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-                    <!-- <hr /> -->
-                    <!-- Comments form-->
-                    <div class="card my-4">
-                        <!-- <h5 class="card-header">Leave a Comment:</h5> -->
-                        <!-- <div class="card-body"> -->
-                            <!-- <form>
-                                <div class="form-group"><textarea class="form-control" rows="3"></textarea></div>
-                                <button class="btn btn-primary" type="submit">Submit</button>
-                            </form> -->
-                        <!-- </div> -->
-                    </div>
-                    <!-- Single comment-->
-                    <div class="media mb-4">
-                        <!-- <img class="d-flex mr-3 rounded-circle" src="https://via.placeholder.com/50x50" alt="..." /> -->
-                        <!-- <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div> -->
-                    </div>
-                    <!-- Comment with nested comments-->
-                    <div class="media mb-4">
-                        <!-- <img class="d-flex mr-3 rounded-circle" src="https://via.placeholder.com/50x50" alt="..." /> -->
-                        <div class="media-body">
-                            <!-- <h5 class="mt-0">Commenter Name</h5> -->
-                            <!-- Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. -->
-                            <div class="media mt-4">
-                                <!-- <img class="d-flex mr-3 rounded-circle" src="https://via.placeholder.com/50x50" alt="..." /> -->
-                                <div class="media-body">
-                                    <!-- <h5 class="mt-0">Commenter Name</h5> -->
-                                    <!-- Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. -->
-                                </div>
-                            </div>
-                            <div class="media mt-4">
-                                <!-- <img class="d-flex mr-3 rounded-circle" src="https://via.placeholder.com/50x50" alt="..." />
-                                <div class="media-body">
-                                    <h5 class="mt-0">Commenter Name</h5>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div> -->
-                            </div>
+=======
+                    <input type="submit" name="Submit" id="submit-btn" class=" valo submit-changes">
+           </div> 
+        </form>
                         </div>
+                    </div>
+                    <hr />
+                  <!-- Ad here -->
+                    <div class="working">
+                    <h2 class="">How Resume Checker works? <i class="fas fas1 fa-angle-double-down"></i></h2>
+                    <!-- Timeline -->
+                     <div class="container1">
+            <div class="timeline">
+                <div class="timeline-container primary">
+                    <div class="timeline-icon">
+                        <i class="fas fa-plus   "></i>
+                    </div>
+                    <div class="timeline-body">
+                        <h4 class="timeline-title"><span class="badge">Upload</span></h4>
+                        <p class="ptime">Upload your resume above to get started. Pdf and word documents work best with our processing algorithm. </p>
+>>>>>>> 637c0c0bb07c41beda8f8d8241234b2ada71a154
+
                     </div>
                 </div>
-                <!-- Sidebar widgets column-->
+                <div class="timeline-container danger">
+                    <div class="timeline-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="timeline-body">
+                        <h4 class="timeline-title"><span class="badge">Computation</span></h4>
+                        <p class="ptime">Our algorithm analyzes the doc on various parameters which are considered paramount by industry experts and calculates an overall score and individual scores for each category. The scoring is done relative to some best chosen resumes as well as the ones uploaded on the website by other users.</p>
+
+                    </div>
+                </div>
+                <div class="timeline-container success">
+                    <div class="timeline-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="timeline-body">
+                        <h4 class="timeline-title"><span class="badge">Score & Improvements</span></h4>
+                        <p class="ptime">Check your score and find out the areas you need to improve in. Our tool helps you find the weak spots so that you can focus on working out those very flaws.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+                <br>
+                <br>
+                <h2 class="scorebetter">How to get a better score and improve your resume:</h2>
+                <img class="img-fluid rounded" src="assets/2914.jpg" alt="..." />
+                <ol>
+                  <li><h4>Make Your Resume Header Stand Out</h4></li>
+                  <li><h4>Use Action Words</h4></li>
+                  <li><h4>Get Your Formatting Right</h4></li>
+                  <li><h4>Use Numbers</h4></li>
+                  <li><h4>Tailor Your Resume to the Job Offer</h4></li>
+                  <li><h4>Proofread!</h4></li>
+                  <li><h4>Have a Strong Objective</h4></li>
+                  <li><h4>Include live links</h4></li>
+                  <li><h4>Keep relevant info at top</h4></li>    
+                </ol>
+                <p class="lead"><b>Why you should create a strong resume?</b><br>
+                        Resumes get sent to employers to determine your eligibility for a job. Employers use resumes to get a deeper understanding of candidate skills, strengths and experience.  Your resume is your first point of contact with the employer and sets the tone for subsequent steps such as first interview, second interview, pre-screening and on-boarding.</p>
+            
+                    </div>
+                <!-- Sidebar column-->
                 <div class="col-md-3">
-                    <!-- Search widget-->
                     <div class="card my-3">
-                        <!-- <h5 class="card-header">Search</h5> -->
                         <div class="card-body">
-                            <!-- <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search for..." />
-                                <span class="input-group-append"><button class="btn btn-secondary" type="button">Go!</button></span>
-                            </div> -->
                             <h4>Ad goes here</h4>
                         </div>
                     </div>
-                    <!-- Categories widget-->
                     <div class="card my-3">
-                        <!-- <h5 class="card-header">Search</h5> -->
                         <div class="card-body">
-                            <!-- <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search for..." />
-                                <span class="input-group-append"><button class="btn btn-secondary" type="button">Go!</button></span>
-                            </div> -->
                             <h4>Ad goes here</h4>
                         </div>
                     </div>
-                    <!-- Side widget-->
                     <div class="card my-3">
-                        <!-- <h5 class="card-header">Search</h5> -->
                         <div class="card-body">
-                            <!-- <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search for..." />
-                                <span class="input-group-append"><button class="btn btn-secondary" type="button">Go!</button></span>
-                            </div> -->
                             <h4>Ad goes here</h4>
                         </div>
-                    </div>
+                    </div></div></div></div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Scroll back up.<br>Here's where the magic ends. No, there's no 'About Us' page. We take our privacy very seriously. You should too!
+                <br><a href="<a href='https://www.freepik.com/vectors/banner'>Banner vector created by upklyak - www.freepik.com</a>">Image credits</a> Privacy policy</p>
                 </footer>
+                 <!-- troll -->
+                <script>
+        window.addEventListener(
+            "resize", getSizes, false);
+  
+        
+        function getSizes() {
+            let zoom = ((window.outerWidth - 10)
+                / window.innerWidth) * 100;
+                  
+            if(zoom>111)
+            {
+                alert("Plz no zoom. Me hurts..");
+            }
+        }
+    </script>
         <!-- Bootstrap core JS-->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{{ url_for('static',filename='js/scripts.js')}}"></script>
-        <script src="{{ url_for('static',filename='js/upload.js')}}"></script>
-
-
+        <script src="js/upload.js"></script>
     </body>
-
 </html>
-<!--
-<div class="col-lg-9 one">
-                    <div class="card my-3">
-                        <div class="card-body">
-                            <h4>Ad goes here</h4>
-                        </div>
-                    </div></div> -->
