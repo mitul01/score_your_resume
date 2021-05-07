@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 
 @font-face {
@@ -35,11 +36,22 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
+ * {
+   margin: 0;
+   padding: 0;
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    /*overflow-x: hidden; */
 }
 
 html {
@@ -127,10 +139,14 @@ dd {
 blockquote {
   margin: 0 0 1rem;
 }
-
+/*
 b,
 strong {
   font-weight: bolder;
+}*/
+b
+{
+  color: #692d8a;
 }
 
 small {
@@ -569,8 +585,8 @@ pre code {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  /*margin-right: -15px;*/
+  /*margin-left: -15px;*/
 }
 
 .no-gutters {
@@ -7766,7 +7782,7 @@ button.bg-dark:focus {
 
 .pt-5,
 .py-5 {
-  padding-top: 3rem !important;
+  padding-top: 2rem !important;
 }
 
 .pr-5,
@@ -7776,7 +7792,7 @@ button.bg-dark:focus {
 
 .pb-5,
 .py-5 {
-  padding-bottom: 3rem !important;
+  padding-bottom: 2rem !important;
 }
 
 .pl-5,
@@ -10112,6 +10128,10 @@ header
   background-size: 200vh;
   /*animation: open .5s;*/
 }
+.no-bor
+{
+  box-shadow:  rgba(103, 114, 229, 0.15) 5px 5px, rgba(103, 114, 229, 0.1) 10px  10px;
+}
 /*div {
    display: flex;
    height: 100vh;
@@ -10403,11 +10423,195 @@ form{
    box-shadow: 0px 6px 15px #00f 61;
    /*padding: 1.5rem 3.5rem 1.5rem 1.5rem;*/
 }
+.working
+{ margin-top: 10vh;
+  position: relative;
+  margin-bottom: 20px;
+  /*display: flex;*/
+}
+.how
+{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
 
+  /*width: 50vh;*/
+}
+.full
+{
+  height: 100%;
+}
+/*----Timeline----*/
 
 
+ .container1 {
+   
+   max-width: 650px;
+   margin-top: 50px;
+   /*margin-top: 50vh;*/
+   
+}
+ p {
+   font-weight: 300;
+   line-height: 1.5;
+   font-size: 14px;
+   opacity: 0.8;
+}
+ .timeline {
+   position: relative;
+   padding-left: 4rem;
+   margin: 0 0 0 30px;
+   color: white;
+}
+ .timeline:before {
+   content: '';
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 4px;
+   height: 100%;
+   background: #27293d;
+}
+ .timeline .timeline-container {
+   position: relative;
+   margin-bottom: 2.5rem;
+}
+ .timeline .timeline-container .timeline-icon {
+   position: absolute;
+   left: -88px;
+   top: 4px;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   text-align: center;
+   font-size: 2rem;
+   background: #4f537b;
+}
+ .timeline .timeline-container .timeline-icon i {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+}
+ .timeline .timeline-container .timeline-icon img {
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
+}
+ .timeline .timeline-container .timeline-body {
+   background: #27293d;
+   border-radius: 3px;
+   padding: 20px 20px 15px;
+   box-shadow: 1px 3px 9px rgba(0, 0, 0, .1);
+}
+ .timeline .timeline-container .timeline-body:before {
+   content: '';
+   background: inherit;
+   width: 20px;
+   height: 20px;
+   display: block;
+   position: absolute;
+   left: -10px;
+   transform: rotate(45deg);
+   border-radius: 0 0 0 2px;
+}
+ .timeline .timeline-container .timeline-body .timeline-title {
+   margin-bottom: 1.4rem;
+}
+ .timeline .timeline-container .timeline-body .timeline-title .badge {
+   background: #4f537b;
+   padding: 4px 8px;
+   border-radius: 3px;
+   font-size: 12px;
+   font-weight: bold;
+}
+ .timeline .timeline-container .timeline-body .timeline-subtitle {
+   font-weight: 300;
+   font-style: italic;
+   opacity: 0.4;
+   margin-top: 16px;
+   font-size: 11px;
+}
+ .timeline .timeline-container.primary .badge, .timeline .timeline-container.primary .timeline-icon {
+   background: #1d8cf8 !important;
+}
+ .timeline .timeline-container.info .badge, .timeline .timeline-container.info .timeline-icon {
+   background: #11cdef !important;
+}
+ .timeline .timeline-container.success .badge, .timeline .timeline-container.success .timeline-icon {
+   background: #00bf9a !important;
+}
+ .timeline .timeline-container.warning .badge, .timeline .timeline-container.warning .timeline-icon {
+   background: #ff8d72 !important;
+}
+ .timeline .timeline-container.danger .badge, .timeline .timeline-container.danger .timeline-icon {
+   background: #fd5d93 !important;
+}
+ .author {
+   font-family: inherit;
+   padding: 3em;
+   text-align: center;
+   width: 100%;
+   color: white;
+}
+ .author a:link, .author a:visited {
+   color: white;
+}
+ .author a:link:hover, .author a:visited:hover {
+   text-decoration: none;
+}
+ .author .btn:link, .author .btn:visited {
+   margin-top: 1em;
+   text-decoration: none;
+   display: inline-block;
+   font-family: inherit;
+   font-weight: 100;
+   color: white;
+   text-align: center;
+   vertical-align: middle;
+   user-select: none;
+   background-color: black;
+   padding: 1.5em 2rem;
+   border-radius: 1em;
+   transition: 0.5s all;
+}
+ .author .btn:link:hover, .author .btn:visited:hover, .author .btn:link:focus, .author .btn:visited:focus, .author .btn:link:active, .author .btn:visited:active {
+   background-color: #1a1a1a;
+}
+.ptime
+{
+  margin-bottom: 0px;
+} 
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
 
+ol {
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+ol li {
+  counter-increment: my-awesome-counter;
+  display: flex;
+  width: 50%;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+ol li::before {
+  content: "0" counter(my-awesome-counter);
+  font-weight: bold;
+  font-size: 3rem;
+  margin-right: 0.5rem;
+  font-family: 'Abril Fatface', serif;
+  line-height: 1;
+  color: #692d8a;
+}
+.scorebetter{
+ margin-bottom: 50px;
+}
 
 
 
@@ -10419,7 +10623,7 @@ form{
     padding-bottom: 50px; }
   header
   {
-    height: 28vh;
+    height: 25vh;
   }
 }
 @media only screen and (max-width:309px) {
@@ -10430,3 +10634,13 @@ form{
   h1 {  font-size: 60px;
      }
 }
+@media only screen and (max-width: 580px) {
+html{
+   width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+ 
+  }
