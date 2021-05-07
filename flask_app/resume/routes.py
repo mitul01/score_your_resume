@@ -1,4 +1,4 @@
-from flask import render_template,request,Blueprint,flash,redirect
+from flask import render_template,request,Blueprint,flash,redirect,url_for
 from flask_app import db
 from flask_app.model import Resume
 from flask_app.forms import ResumeForm
@@ -52,10 +52,15 @@ def upload():
                 resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career="Data Science",weighted_score=final_score)
                 db.session.add(resume)
                 db.session.commit()
-                return render_template('score.html',keyword_score=sr.points()[0],word_count_score=sr.points()[1],
-                                                polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
-                                                quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score)
-            else:
-                return render_template('index.html',error="No file uploaded")
+                return redirect(url_for('resume.score',sr=sr))
+
+        else:
+            return render_template('index.html',error="No file uploaded")
 
     return render_template('index.html',error="")
+
+@resume.route('/score/<sr>',methods=['GET','POST'])
+def score(sr):
+    return render_template('score.html',keyword_score=sr.points()[0],word_count_score=sr.points()[1],
+                                    polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
+                                    quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score)
