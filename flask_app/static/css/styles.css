@@ -3,9 +3,9 @@
 
 @font-face {
   font-family: 'Orelega One';
-  src: url('OrelegaOne-Regular.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-   url('OrelegaOne-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}  
+  src:"{{ url_for('static',filename='css/OrelegaOne-Regular.woff')}}" format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   "{{ url_for('static',filename='css/OrelegaOne-Regular.tff')}}" format('truetype');
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -10020,7 +10020,7 @@ h3 {
 *{padding: 0; margin: 0; box-sizing: border-box;}
 body{height: 900px;}
 header {
-  background: url('http://www.autodatz.com/wp-content/uploads/2017/05/Old-Car-Wallpapers-Hd-36-with-Old-Car-Wallpapers-Hd.jpg');
+  /* background: url('http://www.autodatz.com/wp-content/uploads/2017/05/Old-Car-Wallpapers-Hd-36-with-Old-Car-Wallpapers-Hd.jpg'); */
   text-align: center;
   width: 100%;
   height: 20vh;
@@ -10038,11 +10038,10 @@ header {
   color: #FFF;
   text-shadow: 1px 1px 1px #333;
   background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
-  
+
 }*/
 
 h1 {
-  /*font-family: 'Dancing Script', cursive;*/
   font-size: 80px;
   margin-bottom: 30px;
 }
@@ -10119,9 +10118,9 @@ header
     text-align: center;
 }
 
-.upload {  
+.upload {
  /*background-image: url("12426.jpg");*/
- 
+
   background-color: #f3f3f3;
   background-repeat: no-repeat, no-repeat;
   background-position: center;
@@ -10251,7 +10250,7 @@ header
  div a:hover span.text:after {
    background: #ece8e1;
 }
- 
+
 
 /*------------*/
 .js .inputfile {
@@ -10446,11 +10445,11 @@ form{
 
 
  .container1 {
-   
+
    max-width: 650px;
    margin-top: 50px;
    /*margin-top: 50vh;*/
-   
+
 }
  p {
    font-weight: 300;
@@ -10582,7 +10581,7 @@ form{
 .ptime
 {
   margin-bottom: 0px;
-} 
+}
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
 
 ol {
@@ -10618,12 +10617,12 @@ ol li::before {
 
 /*------------------*/
 @media only screen and (max-width: 620px) {
-  h1 {  
+  h1 {
     padding-top: 0px;
     padding-bottom: 50px; }
   header
   {
-    height: 25vh;
+    height:30vh;
   }
 }
 @media only screen and (max-width:309px) {
@@ -10640,7 +10639,14 @@ html{
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
- 
+
   }
+@media only screen and (max-width: 342px)
+{
+  header
+  {
+    width: 60vh;
+  }
+}

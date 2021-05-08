@@ -1,19 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<body>
-
-<h1>{{ career}}</h1>
-<p>{{keyword_score}}</p>
-<p>{{quantify_score}}</p>
-<p>{{passive_score}}</p>
-<p>{{polarity_score}}</p>
-<p>{{subjectivity_score}}</p>
-<p>{{word_count_score}}</p>
-<p>{{final_score}}</p>
-
-
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
      <head>
@@ -21,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Resume Checker</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/png" href="assets/—Pngtree—colorful letters r_3362386.png"/>
+        <link rel="icon" type="image/png" href="{{ url_for('static',filename='css/logo.png')}}"/>
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles_score.css" rel="stylesheet" />
-        <!--Chart.js JS CDN--> 
+          <link href="{{ url_for('static',filename='css/styles_score.css')}}" rel="stylesheet" />
+        <!--Chart.js JS CDN-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     </head>
 
@@ -60,10 +44,13 @@
       <li>Semantical analysis</li>
     </ul></div>
            </div>
-
+           <script type="text/javascript">
+               var chg=document.getElementById("scorechange");
+               chg.innerHTML={{ final_score }};    //insert here
+           </script>
            <script>
         //score value
-        var value = 30;
+        var value = {{ final_score }};
         // text changing based on value
         var change=document.getElementById("changing");
         if(value>=85)
@@ -106,7 +93,7 @@ var data = {
     }]
 };
 var myChart = new Chart(document.getElementById('myChart'), {
-  
+
   type: 'pie',
   data: data,
   options: {
@@ -125,7 +112,7 @@ var myChart = new Chart(document.getElementById('myChart'), {
     }
   }
 });
-    </script>  
+    </script>
                         </div>
                     </div>
                     <hr />
@@ -135,15 +122,15 @@ var myChart = new Chart(document.getElementById('myChart'), {
                     <span class="ana">Detailed Analysis</span>
                     </h2><br>
                     <canvas id="marksChart" width="600" height="400"></canvas>
-                    
+
                     <script type="text/javascript">
                         //values here
-                    var ky=100;
-                    var sub=40;
-                    var qu=100;
-                    var po=10;
-                    var wc=20;
-                    var acpa=100;
+                    var ky={{ keyword_score }};
+                    var sub={{ subjectivity_score }};
+                    var qu= {{ quantify_score }};
+                    var po= {{ polarity_score }};
+                    var wc= {{ word_count_score }};
+                    var acpa={{ passive_score }};
 var marksCanvas = document.getElementById("marksChart");
 
 var marksData = {
@@ -165,6 +152,7 @@ var radarChart = new Chart(marksCanvas, {
                     </h2><br>
                     <main>
   <ol class="gradient-list">
+    <li id="career"><b>Potential Career Paths:</b><br>{{ career }}</li>
     <li id="key"><b>Keywords:</b><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
     <li id="subj"><b>Subjectivity:</b><br>Aenean tincidunt elit at ipsum cursus, vitae interdum nulla suscipit.</li>
     <li id="quant"><b>Quantifiers:</b><br>Curabitur in orci vel risus facilisis accumsan.</li>
@@ -187,12 +175,12 @@ var radarChart = new Chart(marksCanvas, {
         }
         if(key>=45 && key<65)
         {
-            change.innerHTML="Try increasing more keywords that related to the field you want to enter. This will help it stand out to selection softwares."
+            change.innerHTML="<b>Keywords:</b><br>Try increasing more keywords that related to the field you want to enter. This will help it stand out to selection softwares."
         }
         if(key<45)
         {
-            change.innerHTML="More keywords are needed in your resume to make it pop. This will help it stand out to selection softwares."
-        }      
+            change.innerHTML="<b>Keywords:</b><br>More keywords are needed in your resume to make it pop. This will help it stand out to selection softwares."
+        }
 //Quantifiers
     var quant = 30;
         // text changing based on value
@@ -212,7 +200,7 @@ var radarChart = new Chart(marksCanvas, {
         if(quant<45)
         {
             change.innerHTML="<b>Quantifiers:</b><br>Numbers and percentages convey the message better that words. Try adding more of them wherever appropriate."
-        }   
+        }
 //Subjectivity
     var subj = 30;
         // text changing based on value
@@ -297,7 +285,7 @@ var radarChart = new Chart(marksCanvas, {
 
 </main>
             <br><br>
-            <img class="robot" src="assets/robot.png">
+            <img class="robot" src="{{ url_for('static',filename='css/robot.png') }}">
                     </div>
                 <!-- Sidebar column-->
                  <!-- Sidebar column-->
@@ -322,18 +310,18 @@ var radarChart = new Chart(marksCanvas, {
             <div class="container"><p class="m-0 text-center text-white">Scroll back up.<br>Here's where the magic ends. No, there's no 'About Us' page. We take our privacy very seriously. You should too!
                 <br><a href="<a href='https://pngtree.com/so/robot-clipart'>robot clipart png from pngtree.com</a>">Image credits </a> `<a href=""> Privacy policy</a></p>
                 </footer>
-                <script type="text/javascript">  
+                <script type="text/javascript">
                 </script>
                  <!-- troll -->
                 <script>
         window.addEventListener(
             "resize", getSizes, false);
-  
-        
+
+
         function getSizes() {
             let zoom = ((window.outerWidth - 10)
                 / window.innerWidth) * 100;
-                  
+
             if(zoom>111)
             {
                 alert("Plz no zoom. Me hurts..");

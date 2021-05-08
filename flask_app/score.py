@@ -74,24 +74,24 @@ class ScoreResume:
         text=self.clean_text(text)
         ds_careers=['data science','deep learning','machine learning','sql']
         se_carrers=['software engginering','software development']
-        tech_others=['web development','cyber forensic','app development']
-        non_tech=['desgining','research and development','society','writing','finance','marketing']
+        tech_others=['web development','cyber forensics','app development']
+        non_tech=['desgining','research and','and development','economist','writing','finance','marketing']
 
         text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)
         tokens = [token for token in text.split(" ") if token != ""]
         ngrams_t = list(ngrams(tokens, 2))
         ngrams_text=[" ".join(ngram) for ngram in ngrams_t]
 
-        count={'Data Science':0,'Software Engginering':0,'Freelancing_tech':0,'Non_tech':0}
+        count={'Data Science':0,'Software Engginering':0,'Freelancing Tech':0,'Non Tech':0}
         for t in tokens:
             if t in ds_careers:
                 count['Data Science']+=1
             if t in se_carrers:
                 count['Software Engginering']+=1
             if t in tech_others:
-                count['Freelancing_tech']+=1
+                count['Freelancing Tech']+=1
             if t in non_tech:
-                count['Non_tech']+=1
+                count['Non Tech']+=1
 
         for t in ngrams_text:
             if t in ds_careers:
@@ -99,9 +99,9 @@ class ScoreResume:
             if t in se_carrers:
                 count['Software Engginering']+=1
             if t in tech_others:
-                count['Freelancing_tech']+=1
+                count['Freelancing Tech']+=1
             if t in non_tech:
-                count['Non_tech']+=1
+                count['Non Tech']+=1
 
 
         career = max(count, key= lambda x: count[x])
@@ -121,9 +121,10 @@ class ScoreResume:
             if passive:
                 count_passive=count_passive+1
 
-        scaled_passive_score=self.range_score(output_start=0,output_end=100,
-                                        input_start=0,input_end=len(sents),input=count_passive)
-        return scaled_passive_score
+        active_score = round(len(sents)/4)+ (len(sents)-count_passive)
+        scaled_active_score=self.range_score(output_start=0,output_end=100,
+                                        input_start=0,input_end=(len(sents)+round(len(sents)/4)),input=active_score)
+        return round(scaled_active_score)
 
     def sentiment(self):
         text=self.get_file_text()
@@ -161,7 +162,7 @@ class ScoreResume:
         general_keyword={'certifications':1,'experience':1,'skills':1,
                         'voluntary':2,'specialist':1,'knowledge':1,'exceptional':1,
                         'satisfaction':1,'school':1,'degree':1,'college':1,'university':1,
-                        'responsibilities':1,'achievements':2,}
+                        'responsibilities':1,'achievements':2,'projects':2,'academic':1,'internship':3}
         for t in text.split(" "):
             match=self.closeMatches(list(general_keyword.keys()),t)
             if match!=[]:
@@ -179,16 +180,20 @@ class ScoreResume:
         # Calculating points on basis of career
         #1) Data Science
         if self.get_career()=="Data Science":
-            points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
+            points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1,
+                            'linux':4,'aws':4,'heroku':2,'flask':2,'api':3,'github':4,'git':4}
         #2) Software engginering
         elif self.get_career()=="Software Engginering":
-            points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
+            points_dict={'c++':1,'c':1,'java':2,'devops':3,'python':2,'oops':4,'programming':3,'github':4,'git':4,
+                            'software':5,'sdlc':1,'algorithms':5,'dbms':4,'sql':2,'linux':4,'operating':2,'systems':2}
         #3)
-        elif self.get_career()=="Freelancing_tech":
-            points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
+        elif self.get_career()=="Freelancing Tech":
+            points_dict={'java':1,'andriod':5,'javascript':5,'css':3,'html':3,'python':3,'c':3,'linux':3,'c++':2,'api':3,
+                                'studio':2,'github':4,'git':4}
         #4)
-        elif self.get_career()=="Non_tech":
-            points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
+        elif self.get_career()=="Non Tech":
+            points_dict={'marketing':1,'finance':2,'economics':2,'blog':1,'writing':3,'designing':2,
+                            'adobe':3,'debate':5,'mnu':4,'law':4}
         else:
             points_dict={''}
 

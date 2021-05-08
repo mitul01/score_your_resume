@@ -59,8 +59,10 @@ def upload():
                                                polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
                                                quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score,
                                                career=sr.get_career())
+            else:
+                render_template('index.html',error="Please upload .docx or pdf file")                                   
 
         else:
             return render_template('index.html',error="No file uploaded")
 
-    #return render_template('index.html',error="")
+    return render_template('index.html',error="")
