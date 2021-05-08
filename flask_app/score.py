@@ -1,4 +1,6 @@
 import PyPDF2
+import pdftotext
+import io
 import pathlib
 from docx import Document
 import docx2txt
@@ -8,16 +10,16 @@ import math
 from textblob import TextBlob
 import spacy
 from spacy.matcher import Matcher
-import math
 from collections import Counter
+from nltk.util import ngrams
 from flask_app.utils.grammar import extract_grammar_words
 from flask_app.utils.active_voice import ActiveVoice
 
 class ScoreResume:
-    def __init__(self,file,file_ext,career):
-        self.file_ext=file_ext
+    def __init__(self,file,file_ext,file_path):
+        self.file_path=file_path
         self.file=file
-        self.career=career
+        self.file_ext=file_ext
 
     def __repr__(self):
         return repr("FileObj:"+ str(self.file))
@@ -34,17 +36,14 @@ class ScoreResume:
         # Read PDF file
         if self.file_ext==".pdf":
             doc_text=[]
-            pdfReader = PyPDF2.PdfFileReader(self.file)
-            pages=pdfReader.numPages
-            for p in range(0,pages):
-                pageObj=pdfReader.getPage(p)
-                text=pageObj.extractText()
-                text=str(text)
-                text=self.clean_text(text)
+            with open(self.file_path, "rb") as f:
+                pdf = pdftotext.PDF(f)
+            for page in pdf:
+                text = page
                 doc_text.append(text)
             doc_text=",".join(doc_text)
             return doc_text
-        # Read docx file
+    # Read docx file
         elif self.file_ext==".docx":
             text = docx2txt.process(self.file)
             return text
@@ -63,6 +62,51 @@ class ScoreResume:
         text=self.get_file_text()
         text=self.clean_text(text)
         return(extract_grammar_words(text).get())
+
+    def check(self):
+        text=self.get_file_text()
+        text=self.clean_text(text)
+        return text
+
+
+    def get_career(self):
+        text=self.get_file_text()
+        text=self.clean_text(text)
+        ds_careers=['data science','deep learning','machine learning','sql']
+        se_carrers=['software engginering','software development']
+        tech_others=['web development','cyber forensic','app development']
+        non_tech=['desgining','research and development','society','writing','finance','marketing']
+
+        text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)
+        tokens = [token for token in text.split(" ") if token != ""]
+        ngrams_t = list(ngrams(tokens, 2))
+        ngrams_text=[" ".join(ngram) for ngram in ngrams_t]
+
+        count={'Data Science':0,'Software Engginering':0,'Freelancing_tech':0,'Non_tech':0}
+        for t in tokens:
+            if t in ds_careers:
+                count['Data Science']+=1
+            if t in se_carrers:
+                count['Software Engginering']+=1
+            if t in tech_others:
+                count['Freelancing_tech']+=1
+            if t in non_tech:
+                count['Non_tech']+=1
+
+        for t in ngrams_text:
+            if t in ds_careers:
+                count['Data Science']+=1
+            if t in se_carrers:
+                count['Software Engginering']+=1
+            if t in tech_others:
+                count['Freelancing_tech']+=1
+            if t in non_tech:
+                count['Non_tech']+=1
+
+
+        career = max(count, key= lambda x: count[x])
+        return career
+
 
     def voice(self):
         text=self.get_file_text()
@@ -90,7 +134,7 @@ class ScoreResume:
         scaled_subjectivity=self.range_score(output_start=0,output_end=100,
                                 input_start=0,input_end=1,input=subjectivity)
 
-        return (scaled_polarity,scaled_subjectivity)
+        return round(scaled_polarity),round(scaled_subjectivity)
 
     def quantifier_score(self):
         text=self.get_file_text()
@@ -99,17 +143,16 @@ class ScoreResume:
         signs = re.findall(r'%', text)
         scaled_quant_score=self.range_score(output_start=0,output_end=100,
                                 input_start=0,input_end=len(text.split(' '))/6,input=len(numbers)+len(signs))
-        return scaled_quant_score
+        return round(scaled_quant_score)
 
 
     def points(self):
         text=self.get_file_text()
         text=self.clean_text(text)
         # Calculating length Score
-        len_score=len(text)
-        len_score=self.range_value(len_score,500)
-        len_score=self.range_score(output_start=0,output_end=100,
-                                input_start=0,input_end=500,input=len_score)
+        len_score=len(text.split(" "))
+        len_score_scaled=self.range_score(output_start=0,output_end=100,
+                                input_start=0,input_end=2000,input=len_score)
 
         # Calculating General Score
         gen_points_scaled=0
@@ -135,19 +178,19 @@ class ScoreResume:
 
         # Calculating points on basis of career
         #1) Data Science
-        if self.career=="Data Science":
+        if self.get_career()=="Data Science":
             points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
         #2) Software engginering
-        elif self.career=="Software engginering":
+        elif self.get_career()=="Software Engginering":
             points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
         #3)
-        elif self.career=="Software engginering":
+        elif self.get_career()=="Freelancing_tech":
             points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
         #4)
-        elif self.career=="Software engginering":
+        elif self.get_career()=="Non_tech":
             points_dict={'python':1,'c++':1,'machine learning':2,'data science':5,'data':1}
         else:
-            return "error"
+            points_dict={''}
 
         match_career_keywords=[]
         special_points=0
@@ -167,7 +210,7 @@ class ScoreResume:
 
         final_keyword_points=(scaled_gen_points+scaled_special_points)/2
 
-        return round(final_keyword_points),round(len_score)
+        return round(final_keyword_points),round(len_score_scaled)
 
 
 # weighted score generator

@@ -40,23 +40,27 @@ def index():
 @resume.route('/upload',methods=['GET','POST'])
 def upload():
     if request.method == 'POST':
+        print("post")
         if request.files['file-5[]']:
             file = request.files['file-5[]']
+            print("file found")
             if file.filename == '':
                 return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
-                sr=ScoreResume(file,get_file_extension(file),"Data Science")
+                file_path=save_file(file)
+                sr=ScoreResume(file,get_file_extension(file),file_path)
                 final_score=weighted_score(keywords_score=sr.points()[0],word_count_score=sr.points()[1],
-                                        subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
-                                        passive_score=sr.voice(),quantify_score=sr.quantifier_score())
-                resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career="Data Science",weighted_score=final_score)
+                                       subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
+                                       passive_score=sr.voice(),quantify_score=sr.quantifier_score())
+                resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 db.session.add(resume)
                 db.session.commit()
                 return render_template('score.html',keyword_score=sr.points()[0],word_count_score=sr.points()[1],
-                                                polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
-                                                quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score)
+                                               polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
+                                               quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score,
+                                               career=sr.get_career())
 
         else:
             return render_template('index.html',error="No file uploaded")
 
-    return render_template('index.html',error="")
+    #return render_template('index.html',error="")
