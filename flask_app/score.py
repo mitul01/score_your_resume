@@ -1,5 +1,4 @@
 import PyPDF2
-import pdftotext
 import fitz
 import io
 import pathlib
