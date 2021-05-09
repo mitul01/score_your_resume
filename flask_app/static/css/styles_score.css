@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-@font-face {
+/* @font-face {
   font-family: 'Orelega One';
   src: "{{ url_for('static',filename='css/OrelegaOne-Regular.woff')}}" format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
    "{{ url_for('static',filename='css/OrelegaOne-Regular.tff')}}" format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}
+} */
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
