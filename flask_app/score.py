@@ -1,5 +1,6 @@
 import PyPDF2
 import pdftotext
+import fitz
 import io
 import pathlib
 from docx import Document
@@ -36,13 +37,21 @@ class ScoreResume:
         # Read PDF file
         if self.file_ext==".pdf":
             doc_text=[]
-            with open(self.file_path, "rb") as f:
-                pdf = pdftotext.PDF(f)
-            for page in pdf:
-                text = page
+            doc = fitz.open(self.file_path)
+            pages=doc.pageCount
+            for p in range(0,pages):
+                page = doc.loadPage(p)
+                text = page.getText("text")
                 doc_text.append(text)
             doc_text=",".join(doc_text)
             return doc_text
+            # with open(self.file_path, "rb") as f:
+            #     pdf = pdftotext.PDF(f)
+            # for page in pdf:
+            #     text = page
+            #     doc_text.append(text)
+            # doc_text=",".join(doc_text)
+            # return doc_text
     # Read docx file
         elif self.file_ext==".docx":
             text = docx2txt.process(self.file)
