@@ -45,6 +45,7 @@ packaging==20.9
 pandas==1.1.5
 pathlib==1.0.1
 pathy==0.5.2
+sudo apt install build-essential libpoppler-cpp-dev pkg-config python3-dev
 pdftotext==2.1.5
 peewee==3.14.1
 Pillow==8.2.0
