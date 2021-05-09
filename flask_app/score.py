@@ -12,7 +12,7 @@ import spacy
 from spacy.matcher import Matcher
 from collections import Counter
 from nltk.util import ngrams
-from flask_app.utils.grammar import extract_grammar_words
+# from flask_app.utils.grammar import extract_grammar_words
 from flask_app.utils.active_voice import ActiveVoice
 
 class ScoreResume:
@@ -58,10 +58,10 @@ class ScoreResume:
     def closeMatches(self,patterns, word):
         return(get_close_matches(word, patterns))
 
-    def get_verbs(self):
-        text=self.get_file_text()
-        text=self.clean_text(text)
-        return(extract_grammar_words(text).get())
+    # def get_verbs(self):
+    #     text=self.get_file_text()
+    #     text=self.clean_text(text)
+    #     return(extract_grammar_words(text).get())
 
     def check(self):
         text=self.get_file_text()

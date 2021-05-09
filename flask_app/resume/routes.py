@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import secrets
 import os
 import PyPDF2
+from random import randint
 
 resume=Blueprint('resume',__name__)
 UPLOAD_FOLDER = os.path.join(resume.root_path,'resume_files')
@@ -32,6 +33,15 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def boost_score(score):
+    boost=randint(0, 1)
+    print(boost)
+    if score<=50:
+        if boost:
+            return score+20
+        else:
+            return score
+
 ## Routes
 @resume.route('/')
 def index():
@@ -52,6 +62,7 @@ def upload():
                 final_score=weighted_score(keywords_score=sr.points()[0],word_count_score=sr.points()[1],
                                        subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
                                        passive_score=sr.voice(),quantify_score=sr.quantifier_score())
+                final_score=boost_score(final_score)
                 resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 db.session.add(resume)
                 db.session.commit()
@@ -60,7 +71,7 @@ def upload():
                                                quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score,
                                                career=sr.get_career())
             else:
-                render_template('index.html',error="Please upload .docx or pdf file")                                   
+                render_template('index.html',error="Please upload .docx or pdf file")
 
         else:
             return render_template('index.html',error="No file uploaded")
