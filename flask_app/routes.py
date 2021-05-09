@@ -1,7 +1,7 @@
-from flask import render_template,request,Blueprint,flash,redirect,url_for
-from flask_app import db
+from flask import render_template,request,flash,redirect,url_for
+from flask_app import db,app
 from flask_app.model import Resume
-from flask_app.forms import ResumeForm
+# from flask_app.forms import ResumeForm
 from flask_app.model import Resume
 from flask_app.score import ScoreResume,weighted_score
 from werkzeug.utils import secure_filename
@@ -10,8 +10,7 @@ import os
 import PyPDF2
 from random import randint
 
-resume=Blueprint('resume',__name__)
-UPLOAD_FOLDER = os.path.join(resume.root_path,'resume_files')
+UPLOAD_FOLDER = os.path.join(app.root_path,'resume/resume_files')
 ALLOWED_EXTENSIONS = {'pdf','docx'}
 
 # UTILS
@@ -43,11 +42,11 @@ def boost_score(score):
             return score
 
 ## Routes
-@resume.route('/')
+@app.route('/')
 def index():
     return render_template('index.html',error="")
 
-@resume.route('/upload',methods=['GET','POST'])
+@app.route('/upload',methods=['GET','POST'])
 def upload():
     if request.method == 'POST':
         print("post")
