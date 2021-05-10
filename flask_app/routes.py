@@ -57,13 +57,14 @@ def upload():
             if file and allowed_file(file.filename):
                 sr=ScoreResume(file,get_file_extension(file))
                 scores=q.enqueue(run_all,sr)
-                keywords_score=scores[0]
-                word_count_score=scores[1]
-                polarity_score=scores[2]
-                subjectivity_score=scores[3]
-                passive_score=scores[4]
-                quantify_score=scores[5]
-                career=scores[6]
+                list_scores=scores.result
+                keywords_score=list_scores[0]
+                word_count_score=list_scores[1]
+                polarity_score=list_scores[2]
+                subjectivity_score=list_scores[3]
+                passive_score=list_scores[4]
+                quantify_score=list_scores[5]
+                career=list_scores[6]
                 # keywords_score=q.enqueue(sr.points)[0]
                 # word_count_score=q.enqueue(sr.points)[1]
                 # polarity_score=q.enqueue(sr.sentiment)[0]
@@ -71,7 +72,8 @@ def upload():
                 # passive_score=q.enqueue(sr.voice)
                 # quantify_score=q.enqueue(sr.quantifier_score)
                 # career=q.enqueue(sr.get_career)
-                final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score)
+                final_score_eq=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score)
+                final_score=final_score_eq.result
                 final_score=boost_score(final_score)
                 # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 # db.session.add(resume)
