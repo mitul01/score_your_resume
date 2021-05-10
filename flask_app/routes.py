@@ -57,17 +57,25 @@ def upload():
                 return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
                 sr=ScoreResume(file,get_file_extension(file))
-                keywords_score=q.enqueue(sr.points).result
-                print(keywords_score)
-                word_count_score=q.enqueue(sr.word_count).result
-                polarity_score=q.enqueue(sr.polarity).result
-                subjectivity_score=q.enqueue(sr.subjectivity).result
-                passive_score=q.enqueue(sr.voice).result
-                quantify_score=q.enqueue(sr.quantifier_score).result
-                career=q.enqueue(sr.get_career).result
-                final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score).result
-                final_score=q.enqueue(boost_score,final_score).result
-                time.sleep(15)
+                scores=sr.get_all_scores()
+                keywords_score=scores[0]
+                word_count_score=scores[1]
+                polarity_score=scores[2]
+                subjectivity_score=scores[3]
+                passive_score=scores[4]
+                quantify_score=scores[5]
+                career=scores[6]
+                final_score=weighted_score(keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score)
+                final_score=boost_score(final_score)
+                # keywords_score=q.enqueue(sr.points).result
+                # word_count_score=q.enqueue(sr.word_count).result
+                # polarity_score=q.enqueue(sr.polarity).result
+                # subjectivity_score=q.enqueue(sr.subjectivity).result
+                # passive_score=q.enqueue(sr.voice).result
+                # quantify_score=q.enqueue(sr.quantifier_score).result
+                # career=q.enqueue(sr.get_career).result
+                # final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score).result
+                # final_score=q.enqueue(boost_score,final_score).result
                 # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 # db.session.add(resume)
                 # db.session.commit()
