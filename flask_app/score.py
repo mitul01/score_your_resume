@@ -233,12 +233,12 @@ class ScoreResume:
         return round(len_score_scaled)
 
     def get_all_scores(self):
-            text=self.get_file_text()
-            text=self.clean_text(text)
-            keywords_score=self.points()[0]
-            word_count_score=self.points()[1]
-            polarity_score=self.sentiment()[0]
-            subjectivity_score=self.sentiment()[1]
+            # text=self.get_file_text()
+            # text=self.clean_text(text)
+            keywords_score=self.points()
+            word_count_score=self.word_count()
+            polarity_score=self.polarity()
+            subjectivity_score=self.subjectivity()
             passive_score=self.voice()
             quantify_score=self.quantifier_score()
             career=self.get_career()
