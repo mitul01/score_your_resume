@@ -131,16 +131,23 @@ class ScoreResume:
                                         input_start=0,input_end=(len(sents)+round(len(sents)/4)),input=active_score)
         return round(scaled_active_score)
 
-    def sentiment(self):
+    def polarity(self):
         text=self.get_file_text()
         text=self.clean_text(text)
         polarity,subjectivity = TextBlob(text).sentiment
         scaled_polarity=self.range_score(output_start=0,output_end=100,
                                 input_start=-1,input_end=1,input=polarity)
+
+        return round(scaled_polarity)
+
+    def subjectivity(self):
+        text=self.get_file_text()
+        text=self.clean_text(text)
+        polarity,subjectivity = TextBlob(text).sentiment
         scaled_subjectivity=self.range_score(output_start=0,output_end=100,
                                 input_start=0,input_end=1,input=subjectivity)
 
-        return round(scaled_polarity),round(scaled_subjectivity)
+        return round(scaled_subjectivity)
 
     def quantifier_score(self):
         text=self.get_file_text()
@@ -155,11 +162,6 @@ class ScoreResume:
     def points(self):
         text=self.get_file_text()
         text=self.clean_text(text)
-        # Calculating length Score
-        len_score=len(text.split(" "))
-        len_score_scaled=self.range_score(output_start=0,output_end=100,
-                                input_start=0,input_end=2000,input=len_score)
-
         # Calculating General Score
         gen_points_scaled=0
         gen_points=0
@@ -220,7 +222,15 @@ class ScoreResume:
 
         final_keyword_points=(scaled_gen_points+scaled_special_points)/2
 
-        return round(final_keyword_points),round(len_score_scaled)
+        return round(final_keyword_points)
+
+        def word_count(self):
+            text=self.get_file_text()
+            text=self.clean_text(text)
+            len_score=len(text.split(" "))
+            len_score_scaled=self.range_score(output_start=0,output_end=100,
+                                    input_start=0,input_end=2000,input=len_score)
+            return round(len_score_scaled)
 
         def get_all_scores(self):
             text=self.get_file_text()
