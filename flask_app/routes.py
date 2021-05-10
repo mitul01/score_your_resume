@@ -3,7 +3,7 @@ from flask_app import db,app
 from flask_app.model import Resume
 # from flask_app.forms import ResumeForm
 from flask_app.model import Resume
-from flask_app.score import ScoreResume,weighted_score
+from flask_app.score import ScoreResume,weighted_score,run_all
 from werkzeug.utils import secure_filename
 import secrets
 import os
@@ -56,16 +56,23 @@ def upload():
                 return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
                 sr=ScoreResume(file,get_file_extension(file))
-                # keywords_score,word_count_score,polarity_score,subjectivity_score,passive_score,quantify_score,career=q.enqueue(sr.get_all_scores)
-                keywords_score=q.enqueue(sr.points)[0]
-                word_count_score=q.enqueue(sr.points)[1]
-                polarity_score=q.enqueue(sr.sentiment)[0]
-                subjectivity_score=q.enqueue(sr.sentiment)[1]
-                passive_score=q.enqueue(sr.voice)
-                quantify_score=q.enqueue(sr.quantifier_score)
-                career=q.enqueue(sr.get_career)
+                scores=q.enqueue(run_all,sr)
+                keywords_score=scores[0]
+                word_count_score=scores[1]
+                polarity_score=scores[2]
+                subjectivity_score=scores[3]
+                passive_score=scores[4]
+                quantify_score=scores[5]
+                career=scores[6]
+                # keywords_score=q.enqueue(sr.points)[0]
+                # word_count_score=q.enqueue(sr.points)[1]
+                # polarity_score=q.enqueue(sr.sentiment)[0]
+                # subjectivity_score=q.enqueue(sr.sentiment)[1]
+                # passive_score=q.enqueue(sr.voice)
+                # quantify_score=q.enqueue(sr.quantifier_score)
+                # career=q.enqueue(sr.get_career)
                 final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score)
-                final_score=q.enqueue(boost_score,final_score)
+                final_score=boost_score(final_score)
                 # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 # db.session.add(resume)
                 # db.session.commit()

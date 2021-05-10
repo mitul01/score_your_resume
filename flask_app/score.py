@@ -231,8 +231,8 @@ class ScoreResume:
             quantify_score=self.quantifier_score()
             career=self.get_career()
 
-            return keywords_score,word_count_score,polarity_score,subjectivity_score,passive_score,quantify_score,career
-            
+            return [keywords_score,word_count_score,polarity_score,subjectivity_score,passive_score,quantify_score,career]
+
 # weighted score generator
 def weighted_score(keywords_score,
         word_count_score,subjectivity_score,
@@ -259,3 +259,8 @@ def weighted_score(keywords_score,
                     total_score=total_score+(weights[k]*scores[k])
 
             return round(total_score)
+
+# run all
+def run_all(sr):
+    scores=sr.get_all_scores()
+    return scores
