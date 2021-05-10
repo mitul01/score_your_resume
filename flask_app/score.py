@@ -235,8 +235,10 @@ class ScoreResume:
     def get_all_scores(self):
             text=self.get_file_text()
             text=self.clean_text(text)
-            keywords_score,word_count_score=self.points()
-            polarity_score,subjectivity_score=self.sentiment()
+            keywords_score=self.points()[0]
+            word_count_score=self.points()[1]
+            polarity_score=self.sentiment()[0]
+            subjectivity_score=self.sentiment()[1]
             passive_score=self.voice()
             quantify_score=self.quantifier_score()
             career=self.get_career()
