@@ -222,7 +222,17 @@ class ScoreResume:
 
         return round(final_keyword_points),round(len_score_scaled)
 
+        def get_all_scores(self):
+            text=self.get_file_text()
+            text=self.clean_text(text)
+            keywords_score,word_count_score=self.points()
+            polarity_score,subjectivity_score=self.sentiment()
+            passive_score=self.voice()
+            quantify_score=self.quantifier_score()
+            career=self.get_career()
 
+            return keywords_score,word_count_score,polarity_score,subjectivity_score,passive_score,quantify_score,career
+            
 # weighted score generator
 def weighted_score(keywords_score,
         word_count_score,subjectivity_score,

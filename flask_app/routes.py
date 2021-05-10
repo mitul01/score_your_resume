@@ -9,7 +9,9 @@ import secrets
 import os
 import PyPDF2
 from random import randint
-
+from rq import Queue
+from worker import conn
+q = Queue(connection=conn)
 # UPLOAD_FOLDER = os.path.join(app.root_path,'resume/resume_files')
 ALLOWED_EXTENSIONS = {'pdf','docx'}
 
@@ -54,17 +56,20 @@ def upload():
                 return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
                 sr=ScoreResume(file,get_file_extension(file))
-                final_score=weighted_score(keywords_score=sr.points()[0],word_count_score=sr.points()[1],
-                                       subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
-                                       passive_score=sr.voice(),quantify_score=sr.quantifier_score())
-                final_score=boost_score(final_score)
+                keywords_score,word_count_score=q.enqueue(sr.points)
+                polarity_score,subjectivity_score=q.enqueue(sr.sentiment)
+                passive_score=q.enqueue(sr.voice)
+                quantify_score=q.enqueue(sr.quantifier_score)
+                career=q.enqueue(sr.get_career)
+                final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score)
+                final_score=q.enqueue(boost_score,final_score)
                 # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 # db.session.add(resume)
                 # db.session.commit()
-                return render_template('score.html',keyword_score=sr.points()[0],word_count_score=sr.points()[1],
-                                               polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
-                                               quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score,
-                                               career=sr.get_career())
+                return render_template('score.html',keyword_score=keywords_score,word_count_score=word_count_score,
+                                               polarity_score=polarity_score,subjectivity_score=subjectivity_score,
+                                               quantify_score=quantify_score,passive_score=passive_score,final_score=final_score,
+                                               career=career)
             else:
                 render_template('index.html',error="Please upload .docx or pdf file")
 
