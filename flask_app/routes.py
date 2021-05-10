@@ -56,15 +56,15 @@ def upload():
                 return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
                 sr=ScoreResume(file,get_file_extension(file))
-                keywords_score=q.enqueue(sr.points)
+                keywords_score=q.enqueue(sr.points).result
                 print(keywords_score)
-                word_count_score=q.enqueue(sr.word_count)
-                polarity_score=q.enqueue(sr.polarity)
-                subjectivity_score=q.enqueue(sr.subjectivity)
-                passive_score=q.enqueue(sr.voice)
-                quantify_score=q.enqueue(sr.quantifier_score)
-                career=q.enqueue(sr.get_career)
-                final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score)
+                word_count_score=q.enqueue(sr.word_count).result
+                polarity_score=q.enqueue(sr.polarity).result
+                subjectivity_score=q.enqueue(sr.subjectivity).result
+                passive_score=q.enqueue(sr.voice).result
+                quantify_score=q.enqueue(sr.quantifier_score).result
+                career=q.enqueue(sr.get_career).result
+                final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score).result
                 final_score=boost_score(final_score)
                 # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 # db.session.add(resume)
