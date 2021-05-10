@@ -9,6 +9,7 @@ import secrets
 import os
 import PyPDF2
 from random import randint
+import time
 from rq import Queue
 from worker import conn
 q = Queue(connection=conn)
@@ -66,6 +67,7 @@ def upload():
                 career=q.enqueue(sr.get_career).result
                 final_score=q.enqueue(weighted_score,keywords_score,word_count_score,subjectivity_score,polarity_score,passive_score,quantify_score).result
                 final_score=q.enqueue(boost_score,final_score).result
+                time.sleep(15)
                 # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
                 # db.session.add(resume)
                 # db.session.commit()
