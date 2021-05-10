@@ -1,5 +1,10 @@
-import PyPDF2
-import fitz
+from io import StringIO
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfparser import PDFParser
 import io
 import pathlib
 from docx import Document
@@ -16,8 +21,7 @@ from nltk.util import ngrams
 from flask_app.utils.active_voice import ActiveVoice
 
 class ScoreResume:
-    def __init__(self,file,file_ext,file_path):
-        self.file_path=file_path
+    def __init__(self,file,file_ext):
         self.file=file
         self.file_ext=file_ext
 
@@ -35,22 +39,15 @@ class ScoreResume:
     def get_file_text(self):
         # Read PDF file
         if self.file_ext==".pdf":
-            doc_text=[]
-            doc = fitz.open(self.file_path)
-            pages=doc.pageCount
-            for p in range(0,pages):
-                page = doc.loadPage(p)
-                text = page.getText("text")
-                doc_text.append(text)
-            doc_text=",".join(doc_text)
-            return doc_text
-            # with open(self.file_path, "rb") as f:
-            #     pdf = pdftotext.PDF(f)
-            # for page in pdf:
-            #     text = page
-            #     doc_text.append(text)
-            # doc_text=",".join(doc_text)
-            # return doc_text
+            output_string = StringIO()
+            parser = PDFParser(self.file)
+            doc = PDFDocument(parser)
+            rsrcmgr = PDFResourceManager()
+            device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
+            interpreter = PDFPageInterpreter(rsrcmgr, device)
+            for page in PDFPage.create_pages(doc):
+                interpreter.process_page(page)
+            return output_string.getvalue()
     # Read docx file
         elif self.file_ext==".docx":
             text = docx2txt.process(self.file)

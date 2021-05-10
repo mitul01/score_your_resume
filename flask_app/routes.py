@@ -10,7 +10,7 @@ import os
 import PyPDF2
 from random import randint
 
-UPLOAD_FOLDER = os.path.join(app.root_path,'resume/resume_files')
+# UPLOAD_FOLDER = os.path.join(app.root_path,'resume/resume_files')
 ALLOWED_EXTENSIONS = {'pdf','docx'}
 
 # UTILS
@@ -33,9 +33,8 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def boost_score(score):
-    boost=randint(0, 1)
-    print(boost)
     if score<=50:
+        boost=randint(0, 1)
         if boost:
             return score+20
         else:
@@ -49,15 +48,12 @@ def index():
 @app.route('/upload',methods=['GET','POST'])
 def upload():
     if request.method == 'POST':
-        print("post")
         if request.files['file-5[]']:
             file = request.files['file-5[]']
-            print("file found")
             if file.filename == '':
                 return render_template('index.html',error="Error Try again")
             if file and allowed_file(file.filename):
-                file_path=save_file(file)
-                sr=ScoreResume(file,get_file_extension(file),file_path)
+                sr=ScoreResume(file,get_file_extension(file))
                 final_score=weighted_score(keywords_score=sr.points()[0],word_count_score=sr.points()[1],
                                        subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
                                        passive_score=sr.voice(),quantify_score=sr.quantifier_score())
