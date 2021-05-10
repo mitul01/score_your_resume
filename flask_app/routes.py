@@ -57,8 +57,10 @@ def upload():
             if file and allowed_file(file.filename):
                 sr=ScoreResume(file,get_file_extension(file))
                 # keywords_score,word_count_score,polarity_score,subjectivity_score,passive_score,quantify_score,career=q.enqueue(sr.get_all_scores)
-                keywords_score,word_count_score=q.enqueue(sr.points)
-                polarity_score,subjectivity_score=q.enqueue(sr.sentiment)
+                keywords_score=q.enqueue(sr.points)[0]
+                word_count_score=q.enqueue(sr.points)[1]
+                polarity_score=q.enqueue(sr.sentiment)[0]
+                subjectivity_score=q.enqueue(sr.sentiment)[1]
                 passive_score=q.enqueue(sr.voice)
                 quantify_score=q.enqueue(sr.quantifier_score)
                 career=q.enqueue(sr.get_career)
