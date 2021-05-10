@@ -58,9 +58,9 @@ def upload():
                                        subjectivity_score=sr.sentiment()[1],polarity_score=sr.sentiment()[0],
                                        passive_score=sr.voice(),quantify_score=sr.quantifier_score())
                 final_score=boost_score(final_score)
-                resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
-                db.session.add(resume)
-                db.session.commit()
+                # resume=Resume(file_name=secure_filename(file.filename),resume_file=file.read(),career=sr.get_career(),weighted_score=final_score)
+                # db.session.add(resume)
+                # db.session.commit()
                 return render_template('score.html',keyword_score=sr.points()[0],word_count_score=sr.points()[1],
                                                polarity_score=sr.sentiment()[0],subjectivity_score=sr.sentiment()[1],
                                                quantify_score=sr.quantifier_score(),passive_score=sr.voice(),final_score=final_score,
