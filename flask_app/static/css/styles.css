@@ -10609,7 +10609,7 @@ ol li::before {
   color: #692d8a;
 }
 .scorebetter{
- margin-bottom: 50px;
+ margin-bottom: 40px;
 }
 
 
@@ -10647,7 +10647,7 @@ html{
 {
   header
   {
-    width: 60vh;
+    width: 55vh;
   }
 }
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
