@@ -1,6 +1,7 @@
 from flask_app import db
 
 class Resume(db.Model):
+    __tablename__ = 'resume'
     id = db.Column(db.Integer, primary_key=True)
     resume_file= db.Column(db.LargeBinary, nullable=False)
     file_name=db.Column(db.String,nullable=False,default="default.pdf")
