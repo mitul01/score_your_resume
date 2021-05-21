@@ -29,7 +29,7 @@ class ScoreResume:
         return repr("FileObj:"+ str(self.file))
 
     def range_score(self,input,output_start,output_end,input_start,input_end):
-        output = output_start + ((output_end - output_start) / (input_end - input_start)) * (input - input_start)
+        output = output_start + (((output_end - output_start) / (input_end - input_start))) * (input - input_start)
         return output
 
     def range_value(self,input,max_input):
