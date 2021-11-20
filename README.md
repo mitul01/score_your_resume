@@ -6,11 +6,12 @@ A brief description about the process is mentioned on the website.
 https://warm-beyond-01408.herokuapp.com/
 
 # Screenshots of WebPage
-<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img1.png" width="200" height="400" />
-![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img2.png)
-![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img3.png)
-![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img4.png)
-![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img5.png)
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img1.png" width="800" height="400" />
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img2.png" width="800" height="400" />
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img3.png" width="800" height="400" />
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img4.png" width="800" height="400" />
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img5.png" width="800" height="400" />
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img6.png" width="800" height="400" />
 
 
 # Methodology
