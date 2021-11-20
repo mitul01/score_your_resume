@@ -6,8 +6,11 @@ A brief description about the process is mentioned on the website.
 https://warm-beyond-01408.herokuapp.com/
 
 # Screenshots of WebPage
-![img4](https://user-images.githubusercontent.com/19779081/50811485-92955c80-1334-11e9-9ef9-1829d701b6f1.PNG)
-![img4](https://user-images.githubusercontent.com/19779081/50811485-92955c80-1334-11e9-9ef9-1829d701b6f1.PNG)
+![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img1.png)
+![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img2.png)
+![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img3.png)
+![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img4.png)
+![img4](https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img5.png)
 
 
 # Methodology
