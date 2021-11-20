@@ -14,5 +14,5 @@ https://warm-beyond-01408.herokuapp.com/
 
 
 # Methodology
-![img5](https://user-images.githubusercontent.com/19779081/50811547-dc7e4280-1334-11e9-8419-8e045d8d0c90.PNG)
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/methodology.png" width="800" height="400" />
 
