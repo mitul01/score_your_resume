@@ -11,7 +11,7 @@ https://warm-beyond-01408.herokuapp.com/
 <img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img3.png" width="800" height="400" />
 <img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img4.png" width="800" height="400" />
 <img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img5.png" width="800" height="400" />
-<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img6.png" width="800" height="600" />
+<img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img6.png" width="600" height="600" />
 
 
 # Methodology
