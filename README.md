@@ -1,6 +1,5 @@
 # Resume Checker
-Building Resume Checker using NLP Techniques and deploying using flask. NLP Techniques are used for checking Grammar, Active/Passive voice, word count, Subjectivity, Polarity, semantical analysis, quantifiers etc. \n
-A brief description about the process is mentioned on the website.
+Building Resume Checker using NLP Techniques and deploying using flask. NLP Techniques are used for checking Grammar, Active/Passive voice, word count, Subjectivity, Polarity, semantical analysis, quantifiers etc. A brief working of the process is mentioned on the website.
 
 # Wokring Link
 https://warm-beyond-01408.herokuapp.com/
