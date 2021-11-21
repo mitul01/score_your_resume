@@ -4,7 +4,7 @@ Building Resume Checker using NLP Techniques and deploying using flask. NLP Tech
 # Working Link
 https://warm-beyond-01408.herokuapp.com/
 
-# Screenshots of WebPage
+# Screenshots of Website
 <img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img1.png" width="800" height="400" />
 <img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img2.png" width="800" height="400" />
 <img src="https://github.com/mitul01/score_your_resume/blob/master/flask_app/static/website_img3.png" width="800" height="400" />
